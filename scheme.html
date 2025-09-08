@@ -1,0 +1,176 @@
+<div class="container">
+    <header class="fade-in">
+        <h1>工作展示与规划</h1>
+        <p class="subtitle">记录成长的每一步，展望美好的未来</p>
+    </header>
+
+    <div class="content-grid">
+        <!-- 最近工作内容 -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <div class="icon">📊</div>
+                最近工作内容
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年1月</div>
+                    <div class="timeline-title">完成项目管理系统重构</div>
+                    <div class="timeline-content">
+                        使用Vue3 + TypeScript重构了原有的项目管理系统，提升了系统性能50%，代码可维护性大幅提升。
+                    </div>
+                    <span class="tag">Vue3</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">性能优化</span>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年2月</div>
+                    <div class="timeline-title">移动端适配优化</div>
+                    <div class="timeline-content">
+                        完成了公司主要产品的移动端适配工作，采用响应式设计，使移动端用户体验提升了80%。
+                    </div>
+                    <span class="tag">响应式设计</span>
+                    <span class="tag">移动端</span>
+                    <span class="tag">用户体验</span>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年3月</div>
+                    <div class="timeline-title">微前端架构落地</div>
+                    <div class="timeline-content">
+                        成功将微前端架构应用到生产环境，实现了多个团队的独立开发和部署，大大提高了开发效率。
+                    </div>
+                    <span class="tag">微前端</span>
+                    <span class="tag">架构设计</span>
+                    <span class="tag">团队协作</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 未来规划 -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <div class="icon">🚀</div>
+                未来规划
+            </h2>
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-title">学习Rust语言</div>
+                    <div class="plan-status in-progress">进行中</div>
+                </div>
+                <p>深入学习Rust语言，提升系统编程能力，为后续的高性能项目做准备。</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 30%"></div>
+                </div>
+            </div>
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-title">技术分享计划</div>
+                    <div class="plan-status">计划中</div>
+                </div>
+                <p>每月至少进行一次技术分享，提升团队整体技术水平，建立知识库。</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-title">开源项目贡献</div>
+                    <div class="plan-status">计划中</div>
+                </div>
+                <p>积极参与开源项目，提升个人影响力，为社区做出贡献。</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="plan-card">
+                <div class="plan-header">
+                    <div class="plan-title">架构师认证</div>
+                    <div class="plan-status completed">已完成</div>
+                </div>
+                <p>通过系统架构师认证考试，提升架构设计能力和理论水平。</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 统计数据 -->
+    <div class="stats-container fade-in">
+        <div class="stat-card">
+            <div class="stat-number">15</div>
+            <div class="stat-label">完成项目</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">获得奖项</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">代码通过率</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">24</div>
+            <div class="stat-label">技术文章</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 添加滚动动画效果
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = '0.2s';
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+    });
+
+    // 进度条动画
+    const progressBars = document.querySelectorAll('.progress-fill');
+    const animateProgress = () => {
+        progressBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 500);
+        });
+    };
+
+    // 页面加载完成后执行动画
+    window.addEventListener('load', () => {
+        animateProgress();
+    });
+
+    // 添加鼠标悬停效果
+    document.querySelectorAll('.plan-card, .timeline-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(5px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+        });
+    });
+
+    // 添加点击效果
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.addEventListener('click', function() {
+            this.style.backgroundColor = 'rgba(56, 189, 248, 0.1)';
+            setTimeout(() => {
+                this.style.backgroundColor = 'transparent';
+            }, 300);
+        });
+    });
+</script>
