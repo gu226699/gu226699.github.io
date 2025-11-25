@@ -1,0 +1,59 @@
+name: Deploy Jekyll site to Pages
+
+# 仅在 main 分支 push 时运行
+on:
+  push:
+    branches: ["main"]
+  # 允许在 GitHub Actions 界面手动运行
+  workflow_dispatch:
+
+# 设置权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 仅允许一个并发部署
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  # 构建 Jekyll 站点
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ➡️ 使用 Ruby Setup Action 设置 Jekyll 环境
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1' # Chirpy 推荐的 Ruby 版本
+          bundler-cache: true 
+          cache-version: 1 
+
+      # ➡️ 使用 Chirpy 提供的构建脚本
+      - name: Build Jekyll
+        run: |
+          # 确保您的 _config.yml 文件中的 remote_theme 配置正确
+          bundle exec jekyll build --config _config.yml,_tabs/pages.yml
+
+      # ➡️ 将构建结果上传给下一阶段部署
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  # 部署到 GitHub Pages
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
