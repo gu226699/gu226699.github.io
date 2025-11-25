@@ -1,0 +1,36 @@
+# -------------------- 1. 基本信息 --------------------
+# 您的博客名称、副标题
+title: 您的个人博客名 (e.g., Leo's Lab)
+tagline: 您的口号或简介 (e.g., 技术笔记与项目分享)
+description: 这是关于我的个人博客，记录技术、生活和项目。
+url: "https://your-username.github.io" # 替换为您的实际地址
+baseurl: "" # 保持为空
+
+# -------------------- 2. Chirpy 主题配置 --------------------
+# 告诉 Jekyll 使用 Chirpy 作为主题
+remote_theme: "cotes2020/jekyll-theme-chirpy@v6.7.0"
+plugins:
+  - jekyll-feed
+
+# -------------------- 3. 您的自我介绍和导航 --------------------
+# 博客作者信息 (用于文章底部和侧边栏)
+author:
+  name: 您的名字
+  email: your.email@example.com
+  link: "https://your-website.com" # 可指向您的其他主页或简历
+
+# 导航栏 (首页顶部的菜单链接)
+navigation:
+  home: /
+  # 这是您的项目板块入口
+  projects: /tabs/projects.html
+  # 这是您的技术笔记板块入口
+  notes: /tabs/notes.html
+  # 这是您的关于我页面入口
+  about: /tabs/about.html
+
+# -------------------- 4. 样式和功能配置 --------------------
+# 启用暗黑模式切换
+theme_mode:
+  provider: os
+  toggle: true
